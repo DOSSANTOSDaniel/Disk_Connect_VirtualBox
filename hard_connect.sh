@@ -12,23 +12,24 @@
 #================================================================#
 
 usertos=$(w | awk '{print $1}' | awk 'NR==3')
-apt-get update && apt-get upgrade -y
+chemin=/home/"$usertos"/VirtualDisk/
+sudo apt-get update && apt-get upgrade -y
 clear
-usermod -G disk -a $usertos
+sudo usermod -G disk -a "$usertos"
 
-mkdir /home/$usertos/VirtualDisk
-
-cd /home/$usertos/VirtualDisk
+mkdir "$chemin"
 
 lsblk
 echo ""
 read -p "Choisir le nom du disque exemple sda, sdb... : " sdsd
 
-datime=$(date '+%H%M')
+VBoxManage internalcommands createrawvmdk -filename "$chemin"Disk1.vdi -rawdisk /dev/"$sdsd"
 
-VBoxManage internalcommands createrawvmdk -filename image$dat.vdi -rawdisk /dev/$sdsd
-
-chown $usertos:$usertos image$datime.vdi
 clear
-echo -e "\n Il faut maintenant ajouter le disque créé à une VM \n"
+
+vboxmanage list vms
+echo ""
+read -p "Sur quelle vm attacher ce nouveau disque ? " nomVM
+#vboxmanage storagectl "$nomVM" --name "SATA Controller" --add sata --controller IntelAHCI --portcount 1 --bootable on
+vboxmanage storageattach "$nomVM" --storagectl "SATA" --device 0 --port 2 --type hdd --medium "$chemin"Disk1.vdi
 echo "Fin du script"
