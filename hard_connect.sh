@@ -27,6 +27,13 @@ VBoxManage internalcommands createrawvmdk -filename "$chemin"Disk1.vdi -rawdisk 
 
 clear
 
+# détéction du ports utilisé par le contrôleur
+# sur quel controleur agir
+vboxmanage showvminfo Debian | grep "Storage Controller Name"
+
+# sur quel port agir
+
+
 vboxmanage list vms
 echo ""
 read -p "Sur quelle vm attacher ce nouveau disque ? " nomVM
