@@ -3,8 +3,8 @@
 # TITRE: hard_connect
 #================================================================#
 # DESCRIPTION: 
-# Ceci est un script qui servira à connecter un disque dur phisique 
-# sur une configuration virtuelle avec VirtualBox.
+# Ceci est un script qui servira à connecter un disque dur physique
+# sur une configuration virtuelle avec Virtualbox.
 #----------------------------------------------------------------#
 # AUTEURS: Daniel DOS SANTOS < danielitto91@gmail.com >
 #----------------------------------------------------------------#
@@ -27,7 +27,7 @@ VBoxManage internalcommands createrawvmdk -filename "$chemin"Disk1.vdi -rawdisk 
 
 clear
 
-# détéction du ports utilisé par le contrôleur
+# détéction du port utilisé par le contrôleur
 # sur quel controleur agir
 vboxmanage showvminfo Debian | grep "Storage Controller Name"
 
