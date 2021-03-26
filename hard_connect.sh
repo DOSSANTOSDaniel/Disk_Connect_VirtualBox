@@ -27,8 +27,8 @@ VBoxManage internalcommands createrawvmdk -filename "$chemin"Disk1.vdi -rawdisk 
 
 clear
 
-# détéction du port utilisé par le contrôleur
-# sur quel controleur agir
+# détection du port utilisé par le contrôleur
+# sur quel contrôleur agir
 vboxmanage showvminfo Debian | grep "Storage Controller Name"
 
 # sur quel port agir
