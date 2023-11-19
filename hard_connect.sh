@@ -16,6 +16,7 @@ chemin=/home/"$usertos"/VirtualDisk/
 sudo apt-get update && apt-get upgrade -y
 clear
 sudo usermod -G disk -a "$usertos"
+newgrp disk
 
 mkdir "$chemin"
 
